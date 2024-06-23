@@ -72,11 +72,11 @@ hiperparametros = {
     "epochs": 5,
     "batch_size": 64
 }
-with open("hiperparametros.json", "w") as hp_file:
+with open("./saida/hiperparametros.json", "w") as hp_file:
     json.dump(hiperparametros, hp_file)
 
 # 2. Salvar Pesos Iniciais
-model_mc.save_weights("pesos_iniciais.weights.h5")
+model_mc.save_weights("./saida/pesos_iniciais.weights.h5")
 
 # 3. Callback para Salvar o Erro por Iteração
 class CustomCallback(Callback):
@@ -87,19 +87,19 @@ class CustomCallback(Callback):
         self.erros.append(logs.get('loss'))
 
     def on_train_end(self, logs=None):
-        np.save("erro_por_iteracao.npy", self.erros)
+        np.save("./saida/erro_por_iteracao.npy", self.erros)
 
 # Treinamento da CNN com Dados MNIST Brutos para Tarefa Multiclasse
 model_mc.fit(x_train_mc, y_train_mc, validation_data=(x_test_mc, y_test_mc), epochs=10, batch_size=64, callbacks=[CustomCallback()])
 
 # 5. Salvar Pesos Finais
-model_mc.save_weights("pesos_finais.weights.h5")
+model_mc.save_weights("./saida/pesos_finais.weights.h5")
 
 test_loss_mc, test_acc_mc  = model_mc.evaluate(x_test_mc, y_test_mc)
 
 # 6. Salvar Saídas para Dados de Teste
 saidas = model_mc.predict(x_test_mc)
-np.save("saidas_teste.npy", saidas)
+np.save("./saida/saidas_teste.npy", saidas)
 
 
 #################################################### HOG ####################################################
@@ -180,8 +180,8 @@ def imprimir_json(filepath):
         print(data)
 
 # Exemplo de uso
-imprimir_json('hiperparametros.json')
-imprimir_npy('erro_por_iteracao.npy')
-# imprimir_weights_h5('pesos_iniciais.weights.h5')
-# imprimir_weights_h5('pesos_finais.weights.h5')
-imprimir_npy('saidas_teste.npy')
+imprimir_json('./saida/hiperparametros.json')
+imprimir_npy('./saida/erro_por_iteracao.npy')
+# imprimir_weights_h5('./saida/pesos_iniciais.weights.h5')
+# imprimir_weights_h5('./saida/pesos_finais.weights.h5')
+imprimir_npy('./saida/saidas_teste.npy')
