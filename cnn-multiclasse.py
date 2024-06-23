@@ -24,7 +24,7 @@ model.add(layers.Dense(10, activation='softmax'))  # 10 classes
 # Compilar o modelo
 model.compile(optimizer='adam',
               loss='categorical_crossentropy',
-              metrics=['accuracy'])
+              metrics=['accuracy']) #Multiclasse
 
 # Treinar o modelo
 model.fit(train_images, train_labels, epochs=5, batch_size=64)
