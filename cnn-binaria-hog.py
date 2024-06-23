@@ -37,9 +37,13 @@ model = Sequential([
     Dense(2, activation='softmax')  # Usar softmax para classificação binária
 ])
 
-# Passo 3: Compilar e treinar o modelo
+# Passo 3: Compilar, treinar e testar o modelo
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=10)
+
+# Testar o modelo
+test_loss, test_acc = model.evaluate(x_test, y_test)
+print(f'Test accuracy: {test_acc}, Test loss: {test_loss}')
 
 # Passo 4: Preparar os dados usando o descritor HOG
 def extract_hog_features(images):
@@ -61,4 +65,8 @@ model_hog = Sequential([
 ])
 
 model_hog.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
-model_hog.fit(x_train_hog, y_train, validation_data=(x_test_hog, y_test), epochs=100)
+model_hog.fit(x_train_hog, y_train, validation_data=(x_test_hog, y_test), epochs=10)
+
+# Testar o modelo
+test_loss, test_acc = model_hog.evaluate(x_test_hog, y_test)
+print(f'Test accuracy: {test_acc}, Test loss: {test_loss}')
