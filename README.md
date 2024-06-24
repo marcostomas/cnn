@@ -11,4 +11,17 @@ Criação de uma CNN para classificação binária e multiclasse usando o Keras.
 - Rafael Moura de Almeida - NUSP 11225505
 - Thomas Delfs - NUSP 13837175
 
-O arquvio a ser utilizado é o `cnn-all-in-one.py`
+O trabalho está divido em quatro notebooks Jupyter em duas pastas `binaria/` e `multiclasse/`.
+
+Por exemplo, dentro da pasta `binaria/` estão as duas redes que trabalharão com os dados brutos e com extrator hog para classes binárias. O mesmo vale para o outro diretório.
+
+O diretório `etc/` contém arquivos antigos que não fazem parte do trabalho.
+
+## Bibliotecas necessárias
+
+Verifique as instruções de instalação no site de cada biblioteca.
+
+- [Tensorflow](https://www.tensorflow.org/?hl=pt-br)
+- [NumPy](https://numpy.org/)
+- [SciKit-Learn](https://scikit-learn.org/stable/)
+- [SciKit-Image](https://scikit-image.org/)
