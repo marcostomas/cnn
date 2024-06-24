@@ -1,0 +1,72 @@
+{
+    "arquitetura": {
+        "camadas": [
+            {
+                "tipo": "Conv2D",
+                "filtros": 32,
+                "kernel_size": [
+                    3,
+                    3
+                ],
+                "activation": "relu",
+                "input_shape": [
+                    28,
+                    28,
+                    1
+                ]
+            },
+            {
+                "tipo": "MaxPooling2D",
+                "pool_size": [
+                    2,
+                    2
+                ]
+            },
+            {
+                "tipo": "Conv2D",
+                "filtros": 64,
+                "kernel_size": [
+                    3,
+                    3
+                ],
+                "activation": "relu"
+            },
+            {
+                "tipo": "MaxPooling2D",
+                "pool_size": [
+                    2,
+                    2
+                ]
+            },
+            {
+                "tipo": "Conv2D",
+                "filtros": 64,
+                "kernel_size": [
+                    3,
+                    3
+                ],
+                "activation": "relu"
+            },
+            {
+                "tipo": "Flatten"
+            },
+            {
+                "tipo": "Dense",
+                "unidades": 64,
+                "activation": "relu"
+            },
+            {
+                "tipo": "Dense",
+                "unidades": 1,
+                "activation": "sigmoid"
+            }
+        ]
+    },
+    "inicializacao": {
+        "optimizer": "adam",
+        "loss": "binary_crossentropy",
+        "metrics": [
+            "accuracy"
+        ]
+    }
+}

@@ -1,0 +1,68 @@
+{
+    "architecture": {
+        "input_shape": [
+            28,
+            28,
+            1
+        ],
+        "conv_layers": [
+            {
+                "filters": 32,
+                "kernel_size": [
+                    3,
+                    3
+                ],
+                "activation": "relu"
+            },
+            {
+                "filters": 64,
+                "kernel_size": [
+                    3,
+                    3
+                ],
+                "activation": "relu"
+            }
+        ],
+        "pooling_layers": [
+            {
+                "pool_size": [
+                    2,
+                    2
+                ]
+            },
+            {
+                "pool_size": [
+                    2,
+                    2
+                ]
+            }
+        ],
+        "dropout_rates": [
+            0.25,
+            0.25,
+            0.5
+        ],
+        "dense_layers": [
+            {
+                "units": 128,
+                "activation": "relu"
+            }
+        ],
+        "output_layer": {
+            "units": 2,
+            "activation": "softmax"
+        }
+    },
+    "initialization": {
+        "optimizer": "adam",
+        "loss": "binary_crossentropy",
+        "metrics": [
+            "accuracy"
+        ]
+    },
+    "training": {
+        "batch_size": 128,
+        "epochs": 10,
+        "validation_split": 0.1
+    }
+}
