@@ -1,6 +1,6 @@
 # Importar Bibliotecas Necessárias
-import numpy as np
 import json
+import numpy as np
 import tensorflow as tf
 from tensorflow.keras.callbacks import Callback
 from tensorflow.keras.datasets import mnist
@@ -10,6 +10,7 @@ from tensorflow.keras.utils import to_categorical
 from skimage.feature import hog
 from skimage import exposure
 from sklearn.model_selection import train_test_split
+from skimage.transform import resize
 from sklearn.preprocessing import StandardScaler
 
 # Carregar o Conjunto de Dados MNIST
@@ -23,11 +24,16 @@ from sklearn.preprocessing import StandardScaler
 def extract_hog_features(images):
     hog_features = []
     for image in images:
+        # Redimensiona a imagem para (28, 28) com um canal de cor
+        image = resize(image, (28, 28, 1))
+
         # Assegura que a imagem está em 2D (altura, largura)
-        if image.ndim == 3 and image.shape[2] == 1:  # Para imagens com um eixo de canal explícito
+        if image.ndim == 3 and image.shape[2] == 1:  # Todas as imagens agora têm um eixo de canal explícito
             image = image.reshape(image.shape[0], image.shape[1])
+
         fd = hog(image, orientations=8, pixels_per_cell=(4, 4), cells_per_block=(1, 1))
         hog_features.append(fd)
+
     return np.array(hog_features)
 
 # Extração de Características HOG
@@ -103,10 +109,15 @@ np.save("./saida/saidas_teste.npy", saidas)
 
 
 #################################################### HOG ####################################################
+
 # Redefinir a CNN para aceitar entradas HOG (ajustar a entrada conforme necessário)
 model_hog = Sequential([
-    Dense(128, activation='relu', input_shape=(x_train_hog_norm.shape[1],)),
-    Dense(64, activation='relu'),
+    Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=(28, 28, 1)),
+    MaxPooling2D(pool_size=(2, 2)),
+    Conv2D(64, (3, 3), activation='relu'),
+    MaxPooling2D(pool_size=(2, 2)),
+    Flatten(),
+    Dense(128, activation='relu'),
     Dense(10, activation='softmax')
 ])
 model_hog.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])

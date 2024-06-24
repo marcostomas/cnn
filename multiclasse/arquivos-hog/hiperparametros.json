@@ -1,0 +1,15 @@
+{
+    "arquitetura": {
+        "camadas": [
+            64,
+            64,
+            10
+        ],
+        "ativacao": "relu",
+        "ultimo_ativacao": "softmax"
+    },
+    "inicializacao": {
+        "pesos": "he_normal",
+        "bias": "zeros"
+    }
+}

@@ -58,8 +58,12 @@ x_test_hog = extract_hog_features(x_test)
 
 # Passo 8: Redefinir o modelo para aceitar as características HOG como entrada
 model_hog = Sequential([
-    Dense(128, activation='relu', input_shape=(x_train_hog.shape[1],)),
-    Dense(64, activation='relu'),
+    Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=(28, 28, 1)),
+    MaxPooling2D(pool_size=(2, 2)),
+    Conv2D(64, (3, 3), activation='relu'),
+    MaxPooling2D(pool_size=(2, 2)),
+    Flatten(),
+    Dense(128, activation='relu'),
     Dense(10, activation='softmax')
 ])
 
