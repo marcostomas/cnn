@@ -105,6 +105,8 @@ A estrutura completa do treinamento envolve a preparação cuidadosa dos dados, 
 
 # 5. Critério de parada do treinamento.
 
+Não foi implementado. Estamos testando com poucas épocas
+
 # 6. Procedimentos de cálculo de erro na camada de saída.
 
 **Categorical_crossentropy - Utilizada nos arquivos que trabalham com multiclasses**
@@ -179,4 +181,34 @@ Cálculo da Perda e Atualização dos Pesos:
 
 # 8. Teste da CNN para o conjunto de dados MNIST.
 
+Apresentar os 4 testes
+
 # 9. Procedimento de cálculo da matriz de confusão
+
+A matriz de confusão é calculada da seguinte maneira:
+
+1. As previsões do modelo são obtidas usando o método predict no conjunto de teste x_test. Isso resulta em um array de saídas, onde cada saída é um vetor de probabilidades para as classes.
+2. As classes previstas são determinadas usando a função np.argmax(saidas, axis=1), que seleciona os índices dos valores máximos ao longo do eixo 1 (classes) das saídas previstas, convertendo as probabilidades em previsões de classe específicas.
+3. As classes verdadeiras são extraídas de y_test usando a mesma função np.argmax(y_test, axis=1), que seleciona os índices dos valores máximos ao longo do eixo 1, representando as classes verdadeiras.
+4. A função confusion_matrix da biblioteca sklearn.metrics é usada para calcular a matriz de confusão, passando as classes verdadeiras e as classes previstas como argumentos.
+5. A matriz de confusão resultante é visualizada usando a biblioteca seaborn com a função heatmap, que plota a matriz de confusão com os valores de cada célula anotados e um mapa de cores para representação visual.
+
+```python
+# Previsões
+
+classes_previstas = np.argmax(saidas, axis=1)
+classes_verdadeiras = np.argmax(y_test, axis=1)
+
+# Calcule a matriz de confusão
+
+cm = confusion_matrix(classes_verdadeiras, classes_previstas)
+
+# Plot a matriz de confusão
+
+plt.figure(figsize=(10, 8))
+sns.heatmap(cm, annot=True, fmt="d", cmap="Blues")
+plt.xlabel('Predicted labels')
+plt.ylabel('True labels')
+plt.title('Matriz de Confusão')
+plt.show()
+```
