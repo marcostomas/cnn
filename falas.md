@@ -132,6 +132,51 @@ Ver mais detalhes em: https://www.tensorflow.org/api_docs/python/tf/keras/losses
 
 # 7. Procedimento de cálculo da resposta da rede em termos reconhecimento de caractere.
 
+**Brutos Multiclasse (ou sobre os dados brutos [multiclasse/binário])**
+
+Procedimento de Cálculo da Resposta da Rede
+
+A rede é treinada para classificar imagens de dígitos manuscritos, passando por um processo de normalização, convolução, pooling, flattening e classificação com funções de ativação apropriadas e um processo de otimização para ajustar os pesos da rede com base na função de perda.
+
+Forward Pass:
+
+- Cada imagem de entrada passa pelas camadas convolucionais, onde os filtros convolucionais extraem características importantes.
+- As camadas de pooling reduzem a dimensionalidade das características extraídas.
+- As camadas densas processam as características extraídas e fazem a classificação.
+
+Função de Ativação:
+
+- Funções de ativação ReLU (Rectified Linear Unit) são usadas nas camadas convolucionais e densas intermediárias.
+- A função de ativação softmax na última camada densa converte as saídas em probabilidades para cada uma das classes (dígitos de 0 a 9).
+
+Cálculo da Perda e Atualização dos Pesos:
+
+- A função de perda categorical_crossentropy calcula a diferença entre a previsão do modelo e a verdade real.
+- O otimizador Adam ajusta os pesos da rede para minimizar a perda calculada.
+
+**Hog Binário (ou sobre os dados hog [multiclasse/binário])**
+
+Procedimento de Cálculo da Resposta da Rede
+
+Extração de Características HOG:
+
+- Cada imagem passa pelo descritor HOG, que calcula histogramas de gradientes orientados para capturar a estrutura local das bordas.
+
+Forward Pass:
+
+- As características HOG normalizadas são alimentadas na rede neural.
+- A rede neural consiste em uma camada densa oculta com 128 neurônios e função de ativação ReLU, seguida de uma camada de saída com 2 neurônios e função de ativação softmax para classificação binária.
+
+Função de Ativação:
+
+- ReLU é usada na camada oculta para introduzir não-linearidades.
+- Softmax é usada na camada de saída para converter as saídas em probabilidades para as duas classes.
+
+Cálculo da Perda e Atualização dos Pesos:
+
+- A função de perda categorical_crossentropy calcula a diferença entre as previsões do modelo e os rótulos reais.
+- O otimizador Adam ajusta os pesos da rede para minimizar a perda calculada.
+
 # 8. Teste da CNN para o conjunto de dados MNIST.
 
 # 9. Procedimento de cálculo da matriz de confusão

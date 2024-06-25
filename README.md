@@ -25,3 +25,5 @@ Verifique as instruções de instalação no site de cada biblioteca.
 - [NumPy](https://numpy.org/)
 - [SciKit-Learn](https://scikit-learn.org/stable/)
 - [SciKit-Image](https://scikit-image.org/)
+- [Matplotlib](https://matplotlib.org/)
+- [Seaborn](https://seaborn.pydata.org/)
